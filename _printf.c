@@ -43,7 +43,7 @@ int _printf(const char *format, ...)
 		}
 		else
 		{
-			bytes_written = write(1, (format + i), 1);
+			bytes_written += write(1, (format + i), 1);
 		}
 	}
 	va_end(ap);
