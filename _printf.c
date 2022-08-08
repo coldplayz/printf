@@ -24,14 +24,14 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')	/*when a % character is encountered*/
 		{
-			ret = print_any2(ap, format[i + 1]);	/*ret stores the number of bytes*/
+			ret = print_any2(ap, format[++i]);	/*ret stores the number of bytes*/
 			/*written by the call to print_any2*/
 			va_end(ap);	/*end the use of ap*/
 			va_start(ap, format);	/*re-initialize ap*/
 			bytes_written += ret;
 			if (ret > 0)
 			{
-				if (format[i + 1] != '%')	/*ret_count keeps track of*/
+				if (format[i] != '%')	/*ret_count keeps track of*/
 					/*how many times print_any2*/
 					/*printed a char or string, apart from %*/
 					ret_count += 1;
@@ -40,11 +40,14 @@ int _printf(const char *format, ...)
 				{
 					va_arg(ap, int);
 				}
-				i += 1;
-				ret = -1;
+			}
+			else
+			{
+				write(1, (format + i), 1);
+				bytes_written++;
 			}
 		}
-		if (ret != -1)
+		else
 		{
 			write(1, (format + i), 1);
 			bytes_written += 1;

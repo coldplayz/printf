@@ -107,6 +107,8 @@ void print_posint(int n);
 void print_negint(int n);
 int _printf(const char *format, ...);
 int print_any2(va_list ap, char c);
+int printbin(unsigned int n);
+
 
 
 
