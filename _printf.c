@@ -24,76 +24,34 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')	/*when a % character is encountered*/
 		{
-			ret = print_any2(ap, format[++i]);	/*ret stores the number of bytes*/
+			/*ret stores the number of bytes*/
 			/*written by the call to print_any2*/
-			va_end(ap);	/*end the use of ap*/
-			va_start(ap, format);	/*re-initialize ap*/
-			bytes_written += ret;
-			if (ret > 0)
+			switch (format[++i])
 			{
-				if (format[i] != '%')	/*ret_count keeps track of*/
-					/*how many times print_any2*/
-					/*printed a char or string, apart from %*/
-					ret_count += 1;
-				for (j = 0; j < ret_count; j++)	/*reset ap to the correct*/
-					/*position after being used in print_any2*/
-				{
-					va_arg(ap, int);
-				}
-			}
-			else
-			{
-				write(1, (format + i), 1);
-				bytes_written++;
+				case 'c':
+					bytes_written += printc(va_arg(ap, int));
+					break;
+				case 's':
+					bytes_written += prints(va_arg(ap, char *));
+					break;
+				case '%':
+					bytes_written += printp();
+					break;
+				case 'b':
+					bytes_written += printbin(va_arg(ap, unsigned int));
+					break;
+				default:
+					bytes_written += write(1, (format + i), 1);
 			}
 		}
 		else
 		{
-			write(1, (format + i), 1);
-			bytes_written += 1;
+			bytes_written = write(1, (format + i), 1);
 		}
-		ret = 0;
 	}
 	va_end(ap);
 	return (bytes_written);
 }
-
-
-
-/**
- * print_any2 - prints optional arguments based on the format specified by c
- * @ap: an argument pointer
- * @c: character specifying how an optional argument should be printed
- *
- * Return: the number of bytes written/printed to STDOUT
- */
-int print_any2(va_list ap, char c)
-{
-	int bytes_written;
-	char *ptc;
-
-	bytes_written = 0;
-	switch (c)
-	{
-		case 'c':
-			write(1, c2s((va_arg(ap, int)), 0, 0), 1);
-			bytes_written += 1;
-			break;
-		case 's':
-			ptc = va_arg(ap, char *);
-			write(1, ptc, _strlen(ptc));
-			va_arg(ap, char *);
-			bytes_written += _strlen(ptc);
-			break;
-		case '%':
-			write(1, "%", 1);
-			bytes_written += 1;
-			break;
-	}
-
-	return (bytes_written);
-}
-
 
 
 
