@@ -16,7 +16,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j, ret = 0, ret_count = 0, bytes_written = 0;
+	int i, bytes_written = 0;
 	va_list ap;
 
 	va_start(ap, format);	/*initialize argument pointer*/
