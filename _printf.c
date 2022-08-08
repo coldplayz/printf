@@ -25,8 +25,8 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')	/*when a % character is encountered*/
 		{
-			/*ret stores the number of bytes*/
-			/*written by the call to print_any2*/
+			/*bytes_written stores the number of bytes*/
+			/*written by the call to each function*/
 			switch (format[++i])
 			{
 				case 'c':
