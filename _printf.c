@@ -35,10 +35,7 @@ int _printf(const char *format, ...)
 					bytes_written += prints(va_arg(ap, char *));
 					break;
 				case '%':
-					bytes_written += printp();
-					break;
-				case 'b':
-					bytes_written += printbin(va_arg(ap, unsigned int));
+					bytes_written += write(1, "%", 1);
 					break;
 				default:
 					bytes_written += write(1, (format + i), 1);
@@ -110,53 +107,6 @@ int _strlen(char *s)
 
 
 /**
- * printbin - prints an unsigned int in binary.
- * @n: the unsigned integer to print.
- *
- * Return: the number of characters printed, or -1 if write error.
- */
-int printbin(unsigned int n)
-{
-	unsigned int i, q = 1, bin_len = 0;
-	int bytes_written = 0, bytes_count = 0;
-	char *ptc;
-
-	q = n;
-	/*find the length of the binary form of the int*/
-	for (i = 0; q != 0; i++)
-	{
-		q = q / 2;
-		bin_len++;
-	}
-	ptc = malloc(sizeof(char) * bin_len + 1);
-	if (ptc == NULL)
-	{
-		write(1, "?", 1);
-		exit(EXIT_FAILURE);
-	}
-
-	q = n;
-	/*populate the ptc's malloc'd array*/
-	/*with digits of binary, in reversed order*/
-	for (i = 0; q != 0; i++)
-	{
-		ptc[i] = (q % 2) + '0';
-		q /= 2;
-	}
-
-	/*print the ptc array, in reverse*/
-	for (i = (bin_len - 1); i >= 0; i--)
-	{
-		bytes_written = write(1, (ptc + i), 1);
-		if (bytes_written == -1)
-			return (-1);
-		bytes_count += bytes_written;
-	}
-	return (bytes_count);
-}
-
-
-/**
  * printc - prints a char
  * @arg: the char to print
  *
@@ -169,28 +119,6 @@ int printc(char arg)
 	bytes_written = 0;
 	write(1, c2s(arg, 0, 0), 1);
 	bytes_written += 1;
-
-	return (bytes_written);
-}
-
-
-/**
- * printp - prints the percentage character (%).
- *
- * Return: the number of bytes written/printed to STDOUT
- */
-int printp(void)
-{
-	int bytes_written;
-
-	bytes_written = 0;
-
-	bytes_written = write(1, "%", 1);
-
-	if (bytes_written == -1)
-	{
-		return (-1);
-	}
 
 	return (bytes_written);
 }
