@@ -19,7 +19,7 @@ int _printf(const char *format, ...)
 	va_list ap;
 
 	if (format == NULL)
-		return (0);
+		return (-1);
 	va_start(ap, format);	/*initialize argument pointer*/
 	for (i = 0; format[i]; i++)
 	{
