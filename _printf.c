@@ -15,7 +15,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, bytes_written = 0;
+	int i, j, bytes_count = 0, bytes_written = 0, ret = 0;
 	va_list ap;
 
 	if (format == NULL)
@@ -27,28 +27,27 @@ int _printf(const char *format, ...)
 		{
 			/*bytes_written stores the number of bytes*/
 			/*written by the call to each function*/
-			switch (format[++i])
+			if (format[++i] == '%')
 			{
-				case 'c':
-					bytes_written += printc(va_arg(ap, int));
-					break;
-				case 's':
-					bytes_written += prints(va_arg(ap, char *));
-					break;
-				case '%':
-					bytes_written += write(1, "%", 1);
-					break;
-				case 'd':
-				case 'i':
-					bytes_written += printid(va_arg(ap, int));
-					break;
-				default:
-					bytes_written += write(1, (format + i), 1);
+				bytes_written += write(1, (format + i), 1);
+			}
+			else
+			{
+				bytes_count = printfext1(ap, format[i]);
+				bytes_written += bytes_count;
+				if (bytes_count > 0)
+					ret++;
 			}
 		}
 		else
 		{
 			bytes_written += write(1, (format + i), 1);
+		}
+		va_end(ap);
+		va_start(ap, format);
+		for (j = 0; j < ret; j++)
+		{
+			va_arg(ap, int);
 		}
 	}
 	va_end(ap);

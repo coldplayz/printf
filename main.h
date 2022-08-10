@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdarg.h>
 
 char *_memcpy(char *dest, char *src, unsigned int n);
 char *_memset(char *s, char b, unsigned int n);
@@ -116,6 +117,7 @@ int printu(unsigned int n);
 int printo(unsigned int n);
 int printx(unsigned int n);
 int printX(unsigned int n);
+int printfext1(va_list ap, char c);
 
 
 
