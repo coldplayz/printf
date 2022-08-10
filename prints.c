@@ -17,7 +17,7 @@ int prints(char *s)
 
 	if (s == NULL)
 	{
-		return (0);
+		return (bytes_written = (write(1, "(null)", 6)));
 	}
 	bytes_written = 0;
 	bytes_written = write(1, s, _strlen(s));
