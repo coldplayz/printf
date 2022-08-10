@@ -1,5 +1,6 @@
 #ifndef MAIN_H
 #define MAIN_H
+#include <stdarg.h>
 
 char *_memcpy(char *dest, char *src, unsigned int n);
 char *_memset(char *s, char b, unsigned int n);
@@ -100,7 +101,7 @@ char *rev_add_rev(char *s1, char *s2, int revs1, int revs2);
 char **mult_rev_str(char *s1, char *s2, int s1eln, int s2len);
 char *rev_mult_rev(char *s1, char *s2);
 void puts2(char *str);
-int num_len(int n);
+int num_len(long int n);
 int pwr(int base, int index);
 char *c2s(char c, int i, int flag);
 int print_posint(int n);
@@ -111,7 +112,12 @@ int printc(char arg);
 int prints(char *s);
 int printp(void);
 int printid(int n);
-
+int printcp(char c);
+int printu(unsigned int n);
+int printo(unsigned int n);
+int printx(unsigned int n);
+int printX(unsigned int n);
+int printfext1(va_list ap, char c);
 
 
 
