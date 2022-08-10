@@ -5,7 +5,8 @@
 #include "main.h"
 
 /**
- * printfext1 - produces output according to a format. An extension of _printf
+ * printfext1 - produces output according to a
+ * format. An extension of printfext2
  *  @ap: argument pointer recieved from _printf
  *  @c: character specifying format to print argument in.
  *
@@ -20,9 +21,6 @@ int printfext1(va_list ap, char c)
 	{
 		case 'c':
 			bytes_written += printc(va_arg(ap, int));
-			break;
-		case 's':
-			bytes_written += prints(va_arg(ap, char *));
 			break;
 		case '%':
 			bytes_written += write(1, "%", 1);

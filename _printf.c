@@ -15,7 +15,7 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j, bytes_count = 0, bytes_written = 0, ret = 0;
+	int i, j, bytes_count = 0, bytes_written = 0, ret = 0, *pti;
 	va_list ap;
 
 	if (format == NULL)
@@ -33,9 +33,10 @@ int _printf(const char *format, ...)
 			}
 			else
 			{
-				bytes_count = printfext1(ap, format[i]);
+				pti = printfext2(ap, format[i]);
+				bytes_count = pti[0];
 				bytes_written += bytes_count;
-				if (bytes_count > 0)
+				if (bytes_count > 0 || pti[1] == 1)
 					ret++;
 			}
 		}

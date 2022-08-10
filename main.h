@@ -109,7 +109,7 @@ int print_negint(int n);
 int _printf(const char *format, ...);
 int printbin(unsigned int n);
 int printc(char arg);
-int prints(char *s);
+int *prints(char *s);
 int printp(void);
 int printid(int n);
 int printcp(char c);
@@ -118,6 +118,7 @@ int printo(unsigned int n);
 int printx(unsigned int n);
 int printX(unsigned int n);
 int printfext1(va_list ap, char c);
+int *printfext2(va_list ap, char c);
 
 
 
