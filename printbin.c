@@ -14,8 +14,8 @@
  */
 int printbin(unsigned int n)
 {
-	unsigned int i, q = 1, bin_len = 0;
-	int bytes_written = 0, bytes_count = 0;
+	unsigned int q = 1;
+	int i, bin_len = 0, bytes_written = 0, bytes_count = 0;
 	char *ptc;
 
 	q = n;
