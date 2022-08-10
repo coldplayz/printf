@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	int i, j, bytes_count = 0, bytes_written = 0, ret = 0, *pti;
 	va_list ap;
 
-	if (format == NULL)
+	if (format == NULL || (format[0] == '%' && format[1] == 0))
 		return (-1);
 	va_start(ap, format);	/*initialize argument pointer*/
 	for (i = 0; format[i]; i++)
