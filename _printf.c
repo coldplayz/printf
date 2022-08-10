@@ -38,6 +38,21 @@ int _printf(const char *format, ...)
 				case '%':
 					bytes_written += write(1, "%", 1);
 					break;
+				case 'b':
+					bytes_written += printbin(va_arg(ap, unsigned int));
+					break;
+				case 'u':
+					bytes_written += printu(va_arg(ap, unsigned int));
+					break;
+				case 'o':
+					bytes_written += printo(va_arg(ap, unsigned int));
+					break;
+				case 'x':
+					bytes_written += printx(va_arg(ap, unsigned int));
+					break;
+				case 'X':
+					bytes_written += printX(va_arg(ap, unsigned int));
+					break;
 				case 'd':
 				case 'i':
 					bytes_written += printid(va_arg(ap, int));
