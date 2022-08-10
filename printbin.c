@@ -19,8 +19,6 @@ int printbin(unsigned int n)
 	char *ptc;
 
 	q = n;
-	if (q == 0)
-		return (write(1, "0", 1));
 	/*find the length of the binary form of the int*/
 	for (i = 0; q != 0; i++)
 	{
@@ -30,7 +28,8 @@ int printbin(unsigned int n)
 	ptc = malloc(sizeof(char) * bin_len + 1);
 	if (ptc == NULL)
 	{
-		return (0);
+		write(1, "?", 1);
+		exit(EXIT_FAILURE);
 	}
 
 	q = n;
@@ -47,7 +46,7 @@ int printbin(unsigned int n)
 	{
 		bytes_written = write(1, (ptc + i), 1);
 		if (bytes_written == -1)
-			return (bytes_count);
+			return (-1);
 		bytes_count += bytes_written;
 	}
 	return (bytes_count);

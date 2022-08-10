@@ -6,10 +6,9 @@
  *
  * Return: the length/width of n
  */
-int num_len(long int n)
+int num_len(int n)
 {
-	long int q;
-	int len = 1;
+	int q, len = 1;
 
 	q = n / 10;
 	for (; q != 0; )
