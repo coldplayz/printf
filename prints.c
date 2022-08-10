@@ -15,6 +15,10 @@ int prints(char *s)
 {
 	int  bytes_written;
 
+	if (s == NULL)
+	{
+		return (0);
+	}
 	bytes_written = 0;
 	bytes_written = write(1, s, _strlen(s));
 	if (bytes_written == -1)
