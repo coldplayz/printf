@@ -14,12 +14,12 @@
 int *printptr(void *p)
 {
 	long int q = (long int)p, rem = 0, diff = 0;
-	int i, hex_len = 0, ai[2] = {6, 0}, *pti = ai;
+	int i, hex_len = 0, ai[2] = {5, 0}, *pti = ai;
 	char *ptc, *str = "abcdef";
 
 	if (p == NULL)
 	{
-		write(1, "(nil)", 6);
+		write(1, "(nil)", 5);
 		return (pti);
 	}
 	/*find the length of the binary form of the int*/
