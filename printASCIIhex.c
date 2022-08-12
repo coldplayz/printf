@@ -3,15 +3,13 @@
 #include <unistd.h>
 #include <stdio.h>
 #include "main.h"
-
-
 /**
- * printX - prints an unsigned int in uppercase hex.
+ * pah - prints an unsigned int in uppercase hex, and two-character notation.
  * @n: the unsigned integer to print.
  *
  * Return: the number of characters printed.
  */
-int printX(unsigned int n)
+int pah(unsigned int n)
 {
 	unsigned int q = 1, hex_len = 0;
 	int i, rem = 0, bytes_written = 0, bytes_count = 0, diff;
@@ -19,18 +17,21 @@ int printX(unsigned int n)
 
 	q = n;
 	if (q == 0)
-		return (write(1, "0", 1));
+		return (write(1, "00", 2));
 	/*find the length of the hex form of the int*/
 	for (i = 0; q != 0; i++)
 	{
 		q = q / 16;
 		hex_len++;
 	}
-	ptc = malloc(sizeof(char) * hex_len + 1);
+	if (hex_len == 1)
+		ptc = malloc(sizeof(char) * hex_len + 2);
+	else
+		ptc = malloc(sizeof(char) * hex_len + 1);
 	if (ptc == NULL)
 		return (0);
-
 	q = n;
+	ptc[1] = '0';
 	/*populate the ptc's malloc'd array*/
 	/*with digits of hex, in reversed order*/
 	for (i = 0; q != 0; i++)
@@ -43,13 +44,10 @@ int printX(unsigned int n)
 			ptc[i] = rem + '0';
 		q /= 16;
 	}
-
 	/*print the ptc array, in reverse*/
-	for (i = (hex_len - 1); i >= 0; i--)
+	for (i = (hex_len); i >= 0; i--)
 	{
 		bytes_written = write(1, (ptc + i), 1);
-		if (bytes_written == -1)
-			return (bytes_count);
 		bytes_count += bytes_written;
 	}
 	return (bytes_count);

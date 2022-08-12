@@ -119,7 +119,8 @@ int printx(unsigned int n);
 int printX(unsigned int n);
 int printfext1(va_list ap, char c);
 int *printfext2(va_list ap, char c);
-
+int *printS(char *s);
+int pah(unsigned int n);
 
 
 #endif /* MAIN_H */
