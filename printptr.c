@@ -17,7 +17,7 @@ int *printptr(void *p)
 	int i, hex_len = 0, ai[2] = {6, 0}, *pti = ai;
 	char *ptc, *str = "abcdef";
 
-	if (p == 0)
+	if (p == NULL)
 	{
 		write(1, "(nil)", 6);
 		return (pti);
