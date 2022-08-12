@@ -121,6 +121,8 @@ int printfext1(va_list ap, char c);
 int *printfext2(va_list ap, char c);
 int *printS(char *s);
 int pah(unsigned int n);
+int *printptr(void *p);
+
 
 
 #endif /* MAIN_H */

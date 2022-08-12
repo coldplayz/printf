@@ -27,6 +27,9 @@ int *printfext2(va_list ap, char c)
 		case 'S':
 			pti = printS(va_arg(ap, char *));
 			break;
+		case 'p':
+			pti = printptr(va_arg(ap, void *));
+			break;
 		default:
 			pti[0] = printfext1(ap, c);
 	}
