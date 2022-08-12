@@ -13,8 +13,8 @@
  */
 int *printptr(void *p)
 {
-	long int q = (long int)p, rem = 0, diff = 0;
-	int i, hex_len = 0, ai[2] = {5, 0}, *pti = ai;
+	unsigned long int q = (unsigned long int)p, rem = 0;
+	int i, hex_len = 0, ai[2] = {5, 0}, *pti = ai, diff = 0;
 	char *ptc, *str = "abcdef";
 
 	if (p == NULL)
@@ -30,14 +30,13 @@ int *printptr(void *p)
 	ptc = malloc(sizeof(char) * hex_len + 3);
 	if (ptc == NULL)
 		return (0);
-
 	q = (long int)p;
 	/*populate the ptc's malloc'd array*/
 	/*with digits of hex, in reversed order*/
 	for (i = 0; q != 0; i++)
 	{
 		rem = q % 16;
-		diff = rem - 10;
+		diff = (int)rem - 10;
 		if (diff >= 0 && diff <= 5)
 			ptc[i] = str[diff];
 		else
@@ -52,5 +51,6 @@ int *printptr(void *p)
 	{
 		ai[0] += write(1, (ptc + i), 1);
 	}
+	free(ptc);
 	return (pti);
 }
